@@ -14,7 +14,6 @@ class Item:
 
 
 class GildedRose:
-    
     __item_name_aged_brie: Final[str] = "Aged Brie"
     __item_name_backstage_pass: Final[str] = "Backstage passes to a TAFKAL80ETC concert"
     __item_name_sulfuras: Final[str] = "Sulfuras, Hand of Ragnaros"
@@ -22,15 +21,12 @@ class GildedRose:
     def __init__(self, items: list[Item]) -> None:
         self.items = items
 
-    def __increase_quality(self, quality: int) -> int:
-        return quality + 1
-    
-    def __decrease_quality(self, quality: int) -> int:
-        return quality - 1
-    
     def update_quality(self) -> None:
         for item in self.items:
-            if item.name != self.__item_name_aged_brie and item.name != self.__item_name_backstage_pass:
+            if (
+                item.name != self.__item_name_aged_brie
+                and item.name != self.__item_name_backstage_pass
+            ):
                 if item.quality > 0:
                     if item.name != self.__item_name_sulfuras:
                         item.quality = self.__decrease_quality(item.quality)
@@ -58,4 +54,8 @@ class GildedRose:
                     if item.quality < 50:
                         item.quality = self.__increase_quality(item.quality)
 
+    def __increase_quality(self, quality: int) -> int:
+        return quality + 1
 
+    def __decrease_quality(self, quality: int) -> int:
+        return quality - 1
