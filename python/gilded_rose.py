@@ -4,7 +4,7 @@ from typing import Final
 
 
 class Item:
-    def __init__(self, name, sell_in, quality):
+    def __init__(self, name: str, sell_in: int, quality: int):
         self.name = name
         self.sell_in = sell_in
         self.quality = quality
@@ -22,22 +22,28 @@ class GildedRose:
     def __init__(self, items: list[Item]) -> None:
         self.items = items
 
+    def __increase_quality(self, quality: int) -> int:
+        return quality + 1
+    
+    def __decrease_quality(self, quality: int) -> int:
+        return quality - 1
+    
     def update_quality(self) -> None:
         for item in self.items:
             if item.name != self.__item_name_aged_brie and item.name != self.__item_name_backstage_pass:
                 if item.quality > 0:
                     if item.name != self.__item_name_sulfuras:
-                        item.quality = item.quality - 1
+                        item.quality = self.__decrease_quality(item.quality)
             else:
                 if item.quality < 50:
-                    item.quality = item.quality + 1
+                    item.quality = self.__increase_quality(item.quality)
                     if item.name == self.__item_name_backstage_pass:
                         if item.sell_in < 11:
                             if item.quality < 50:
-                                item.quality = item.quality + 1
+                                item.quality = self.__increase_quality(item.quality)
                         if item.sell_in < 6:
                             if item.quality < 50:
-                                item.quality = item.quality + 1
+                                item.quality = self.__increase_quality(item.quality)
             if item.name != self.__item_name_sulfuras:
                 item.sell_in = item.sell_in - 1
             if item.sell_in < 0:
@@ -45,11 +51,11 @@ class GildedRose:
                     if item.name != self.__item_name_backstage_pass:
                         if item.quality > 0:
                             if item.name != self.__item_name_sulfuras:
-                                item.quality = item.quality - 1
+                                item.quality = self.__decrease_quality(item.quality)
                     else:
                         item.quality = item.quality - item.quality
                 else:
                     if item.quality < 50:
-                        item.quality = item.quality + 1
+                        item.quality = self.__increase_quality(item.quality)
 
 
