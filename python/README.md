@@ -1,0 +1,15 @@
+### Refactoring applied:
+- Added type hinting
+- Extract variable (item names)
+- Extract function (__increase_quality, __decrease_quality)
+- Extract function (__update_item_quality)
+- Extract function (__update_item_sell_in)
+- Simplify conditions (__update_item_quality)
+- Extract function (__is_item_quality_below_average)
+- Extract variable (__known_item_names)
+- Move extracted functions from GildedRose to Item
+- Extract function (__is_known_item_name)
+- Extract function to Item class(decrease_sell_in)
+- Extract function to Item class(is_quality_positive)
+- Extract variable (is_unknown_item_with_positive_quality, is_known_item_with_below_quality_average, is_backstage_pass_below_average)
+- Extract function to Item class(is_sell_in_below_low, is_sell_in_below_average)
