@@ -23,36 +23,39 @@ class GildedRose:
 
     def update_quality(self) -> None:
         for item in self.items:
-            if (
-                item.name != self.__item_name_aged_brie
-                and item.name != self.__item_name_backstage_pass
-            ):
-                if item.quality > 0:
-                    if item.name != self.__item_name_sulfuras:
-                        item.quality = self.__decrease_quality(item.quality)
+            self.__update_item_quality(item)
+
+    def __update_item_quality(self, item: Item) -> None:
+        if (
+            item.name != self.__item_name_aged_brie
+            and item.name != self.__item_name_backstage_pass
+        ):
+            if item.quality > 0:
+                if item.name != self.__item_name_sulfuras:
+                    item.quality = self.__decrease_quality(item.quality)
+        else:
+            if item.quality < 50:
+                item.quality = self.__increase_quality(item.quality)
+                if item.name == self.__item_name_backstage_pass:
+                    if item.sell_in < 11:
+                        if item.quality < 50:
+                            item.quality = self.__increase_quality(item.quality)
+                    if item.sell_in < 6:
+                        if item.quality < 50:
+                            item.quality = self.__increase_quality(item.quality)
+        if item.name != self.__item_name_sulfuras:
+            item.sell_in = item.sell_in - 1
+        if item.sell_in < 0:
+            if item.name != self.__item_name_aged_brie:
+                if item.name != self.__item_name_backstage_pass:
+                    if item.quality > 0:
+                        if item.name != self.__item_name_sulfuras:
+                            item.quality = self.__decrease_quality(item.quality)
+                else:
+                    item.quality = item.quality - item.quality
             else:
                 if item.quality < 50:
                     item.quality = self.__increase_quality(item.quality)
-                    if item.name == self.__item_name_backstage_pass:
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.quality = self.__increase_quality(item.quality)
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.quality = self.__increase_quality(item.quality)
-            if item.name != self.__item_name_sulfuras:
-                item.sell_in = item.sell_in - 1
-            if item.sell_in < 0:
-                if item.name != self.__item_name_aged_brie:
-                    if item.name != self.__item_name_backstage_pass:
-                        if item.quality > 0:
-                            if item.name != self.__item_name_sulfuras:
-                                item.quality = self.__decrease_quality(item.quality)
-                    else:
-                        item.quality = item.quality - item.quality
-                else:
-                    if item.quality < 50:
-                        item.quality = self.__increase_quality(item.quality)
 
     def __increase_quality(self, quality: int) -> int:
         return quality + 1

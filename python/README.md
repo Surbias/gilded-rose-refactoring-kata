@@ -1,4 +1,5 @@
 ### Refactoring applied:
 - Added type hinting
 - Extract variable (item names)
-- Extract function (increase_quality, decrease_quality)
+- Extract function (__increase_quality, __decrease_quality)
+- Extract function (__update_item_quality)
