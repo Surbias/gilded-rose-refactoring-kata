@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from typing import Final
+
+
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -11,32 +14,37 @@ class Item:
 
 
 class GildedRose:
+    
+    __item_name_aged_brie: Final[str] = "Aged Brie"
+    __item_name_backstage_pass: Final[str] = "Backstage passes to a TAFKAL80ETC concert"
+    __item_name_sulfuras: Final[str] = "Sulfuras, Hand of Ragnaros"
+
     def __init__(self, items: list[Item]) -> None:
         self.items = items
 
     def update_quality(self) -> None:
         for item in self.items:
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
+            if item.name != self.__item_name_aged_brie and item.name != self.__item_name_backstage_pass:
                 if item.quality > 0:
-                    if item.name != "Sulfuras, Hand of Ragnaros":
+                    if item.name != self.__item_name_sulfuras:
                         item.quality = item.quality - 1
             else:
                 if item.quality < 50:
                     item.quality = item.quality + 1
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
+                    if item.name == self.__item_name_backstage_pass:
                         if item.sell_in < 11:
                             if item.quality < 50:
                                 item.quality = item.quality + 1
                         if item.sell_in < 6:
                             if item.quality < 50:
                                 item.quality = item.quality + 1
-            if item.name != "Sulfuras, Hand of Ragnaros":
+            if item.name != self.__item_name_sulfuras:
                 item.sell_in = item.sell_in - 1
             if item.sell_in < 0:
-                if item.name != "Aged Brie":
-                    if item.name != "Backstage passes to a TAFKAL80ETC concert":
+                if item.name != self.__item_name_aged_brie:
+                    if item.name != self.__item_name_backstage_pass:
                         if item.quality > 0:
-                            if item.name != "Sulfuras, Hand of Ragnaros":
+                            if item.name != self.__item_name_sulfuras:
                                 item.quality = item.quality - 1
                     else:
                         item.quality = item.quality - item.quality
