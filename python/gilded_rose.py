@@ -17,7 +17,7 @@ class GildedRose:
     __item_name_aged_brie: Final[str] = "Aged Brie"
     __item_name_backstage_pass: Final[str] = "Backstage passes to a TAFKAL80ETC concert"
     __item_name_sulfuras: Final[str] = "Sulfuras, Hand of Ragnaros"
-    __known_item_names: Final[str] = [
+    __known_item_names: list[str] = [
         __item_name_aged_brie,
         __item_name_backstage_pass,
         __item_name_sulfuras,
