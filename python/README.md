@@ -8,3 +8,4 @@
 - Extract function (__is_item_quality_below_average)
 - Extract variable (__known_item_names)
 - Move extracted functions from GildedRose to Item
+- Extract function (__is_known_item_name)

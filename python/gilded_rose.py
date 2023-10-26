@@ -46,10 +46,10 @@ class GildedRose:
             self.__update_item_quality(item)
 
     def __update_item_quality(self, item: Item) -> None:
-        if item.name not in self.__known_item_names and item.quality > 0:
+        if not self.__is_known_item_name(item) and item.quality > 0:
             item.decrease_quality()
 
-        if item.name in self.__known_item_names and item.is_quality_below_average():
+        if self.__is_known_item_name(item) and item.is_quality_below_average():
             item.increase_quality()
             if (
                 item.name == self.__item_name_backstage_pass
@@ -61,7 +61,7 @@ class GildedRose:
                     item.increase_quality()
 
         if item.name != self.__item_name_sulfuras:
-            item.sell_in = item.sell_in - 1
+            item.sell_in -= 1
 
         if item.has_zero_or_above_sell_in():
             return
@@ -69,7 +69,7 @@ class GildedRose:
         if item.name == self.__item_name_backstage_pass:
             item.reset_quality()
 
-        if item.name not in self.__known_item_names and item.quality > 0:
+        if not self.__is_known_item_name(item) and item.quality > 0:
             item.decrease_quality()
 
         is_brie_below_average = (
@@ -77,3 +77,6 @@ class GildedRose:
         )
         if is_brie_below_average:
             item.increase_quality()
+
+    def __is_known_item_name(self, item: Item) -> bool:
+        return item.name in self.__known_item_names
