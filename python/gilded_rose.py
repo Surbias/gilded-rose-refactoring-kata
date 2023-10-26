@@ -23,13 +23,7 @@ class GildedRose:
 
     def update_quality(self) -> None:
         for item in self.items:
-            self.__update_item_sell_in(item)
             self.__update_item_quality(item)
-
-    def __update_item_sell_in(self, item: Item) -> None:
-        if item.name != self.__item_name_sulfuras:
-            item.sell_in = item.sell_in - 1
-        return item
 
     def __update_item_quality(self, item: Item) -> None:
         if item.name not in [
@@ -49,6 +43,7 @@ class GildedRose:
                     if item.sell_in < 6:
                         if item.quality < 50:
                             item.quality = self.__increase_quality(item.quality)
+        self.__update_item_sell_in(item)
         if item.sell_in < 0:
             if item.name != self.__item_name_aged_brie:
                 if item.name != self.__item_name_backstage_pass:
@@ -60,6 +55,11 @@ class GildedRose:
             else:
                 if item.quality < 50:
                     item.quality = self.__increase_quality(item.quality)
+
+    def __update_item_sell_in(self, item: Item) -> None:
+        if item.name != self.__item_name_sulfuras:
+            item.sell_in = item.sell_in - 1
+        return item
 
     def __increase_quality(self, quality: int) -> int:
         return quality + 1
