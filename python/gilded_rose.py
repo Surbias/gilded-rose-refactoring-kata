@@ -15,6 +15,9 @@ class Item:
     def is_quality_below_average(self) -> bool:
         return self.quality < 50
 
+    def is_quality_positive(self) -> bool:
+        return self.quality > 0
+
     def increase_quality(self):
         self.quality += 1
 
@@ -26,7 +29,7 @@ class Item:
 
     def has_zero_or_above_sell_in(self) -> bool:
         return self.sell_in >= 0
-    
+
     def decrease_sell_in(self):
         self.sell_in -= 1
 
@@ -49,7 +52,7 @@ class GildedRose:
             self.__update_item_quality(item)
 
     def __update_item_quality(self, item: Item) -> None:
-        if not self.__is_known_item_name(item) and item.quality > 0:
+        if not self.__is_known_item_name(item) and item.is_quality_positive():
             item.decrease_quality()
 
         if self.__is_known_item_name(item) and item.is_quality_below_average():
@@ -72,7 +75,7 @@ class GildedRose:
         if item.name == self.__item_name_backstage_pass:
             item.reset_quality()
 
-        if not self.__is_known_item_name(item) and item.quality > 0:
+        if not self.__is_known_item_name(item) and item.is_quality_positive():
             item.decrease_quality()
 
         is_brie_below_average = (

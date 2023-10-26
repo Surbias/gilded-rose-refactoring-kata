@@ -10,3 +10,4 @@
 - Move extracted functions from GildedRose to Item
 - Extract function (__is_known_item_name)
 - Extract function to Item class(decrease_sell_in)
+- Extract function to Item class(is_quality_positive)
