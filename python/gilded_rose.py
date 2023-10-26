@@ -12,6 +12,21 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
+    def is_quality_below_average(self) -> bool:
+        return self.quality < 50
+
+    def increase_quality(self):
+        self.quality += 1
+
+    def decrease_quality(self):
+        self.quality -= 1
+
+    def reset_quality(self):
+        self.quality = 0
+
+    def has_zero_or_above_sell_in(self) -> bool:
+        return self.sell_in >= 0
+
 
 class GildedRose:
     __item_name_aged_brie: Final[str] = "Aged Brie"
@@ -32,40 +47,33 @@ class GildedRose:
 
     def __update_item_quality(self, item: Item) -> None:
         if item.name not in self.__known_item_names and item.quality > 0:
-            item.quality = self.__decrease_quality(item.quality)
-        else:
-            if self.__is_item_quality_below_average(item.quality):
-                item.quality = self.__increase_quality(item.quality)
-                if (
-                    item.name == self.__item_name_backstage_pass
-                    and self.__is_item_quality_below_average(item.quality)
-                ):
-                    if item.sell_in < 11:
-                        item.quality = self.__increase_quality(item.quality)
-                    if item.sell_in < 6:
-                        item.quality = self.__increase_quality(item.quality)
-        self.__update_item_sell_in(item)
-        if item.sell_in < 0:
-            if item.name != self.__item_name_aged_brie:
-                if item.name != self.__item_name_backstage_pass:
-                    if item.quality > 0 and item.name != self.__item_name_sulfuras:
-                        item.quality = self.__decrease_quality(item.quality)
-                else:
-                    item.quality = item.quality - item.quality
-            else:
-                if self.__is_item_quality_below_average(item.quality):
-                    item.quality = self.__increase_quality(item.quality)
+            item.decrease_quality()
 
-    def __update_item_sell_in(self, item: Item) -> None:
+        if item.name in self.__known_item_names and item.is_quality_below_average():
+            item.increase_quality()
+            if (
+                item.name == self.__item_name_backstage_pass
+                and item.is_quality_below_average()
+                and item.sell_in < 11
+            ):
+                item.increase_quality()
+                if item.sell_in < 6:
+                    item.increase_quality()
+
         if item.name != self.__item_name_sulfuras:
             item.sell_in = item.sell_in - 1
-        return item
 
-    def __is_item_quality_below_average(self, quality: int) -> bool:
-        return quality < 50
+        if item.has_zero_or_above_sell_in():
+            return
 
-    def __increase_quality(self, quality: int) -> int:
-        return quality + 1
+        if item.name == self.__item_name_backstage_pass:
+            item.reset_quality()
 
-    def __decrease_quality(self, quality: int) -> int:
-        return quality - 1
+        if item.name not in self.__known_item_names and item.quality > 0:
+            item.decrease_quality()
+
+        is_brie_below_average = (
+            item.name == self.__item_name_aged_brie and item.is_quality_below_average()
+        )
+        if is_brie_below_average:
+            item.increase_quality()
