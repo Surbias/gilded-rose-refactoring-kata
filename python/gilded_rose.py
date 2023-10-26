@@ -26,39 +26,46 @@ class GildedRose:
             self.__update_item_quality(item)
 
     def __update_item_quality(self, item: Item) -> None:
-        if item.name not in [
-            self.__item_name_aged_brie,
-            self.__item_name_backstage_pass,
-            self.__item_name_sulfuras,
-        ] and item.quality > 0:
+        if (
+            item.name
+            not in [
+                self.__item_name_aged_brie,
+                self.__item_name_backstage_pass,
+                self.__item_name_sulfuras,
+            ]
+            and item.quality > 0
+        ):
             item.quality = self.__decrease_quality(item.quality)
         else:
-            if item.quality < 50:
+            if self.__is_item_quality_below_average(item.quality):
                 item.quality = self.__increase_quality(item.quality)
-                if item.name == self.__item_name_backstage_pass and item.quality < 50:
+                if (
+                    item.name == self.__item_name_backstage_pass
+                    and self.__is_item_quality_below_average(item.quality)
+                ):
                     if item.sell_in < 11:
                         item.quality = self.__increase_quality(item.quality)
                     if item.sell_in < 6:
                         item.quality = self.__increase_quality(item.quality)
-        
         self.__update_item_sell_in(item)
-        
         if item.sell_in < 0:
             if item.name != self.__item_name_aged_brie:
                 if item.name != self.__item_name_backstage_pass:
-                    if item.quality > 0:
-                        if item.name != self.__item_name_sulfuras:
-                            item.quality = self.__decrease_quality(item.quality)
+                    if item.quality > 0 and item.name != self.__item_name_sulfuras:
+                        item.quality = self.__decrease_quality(item.quality)
                 else:
                     item.quality = item.quality - item.quality
             else:
-                if item.quality < 50:
+                if self.__is_item_quality_below_average(item.quality):
                     item.quality = self.__increase_quality(item.quality)
 
     def __update_item_sell_in(self, item: Item) -> None:
         if item.name != self.__item_name_sulfuras:
             item.sell_in = item.sell_in - 1
         return item
+
+    def __is_item_quality_below_average(self, quality: int) -> bool:
+        return quality < 50
 
     def __increase_quality(self, quality: int) -> int:
         return quality + 1
