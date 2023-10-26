@@ -29,21 +29,20 @@ class GildedRose:
         if item.name not in [
             self.__item_name_aged_brie,
             self.__item_name_backstage_pass,
-        ]:
-            if item.quality > 0:
-                if item.name != self.__item_name_sulfuras:
-                    item.quality = self.__decrease_quality(item.quality)
+            self.__item_name_sulfuras,
+        ] and item.quality > 0:
+            item.quality = self.__decrease_quality(item.quality)
         else:
             if item.quality < 50:
                 item.quality = self.__increase_quality(item.quality)
-                if item.name == self.__item_name_backstage_pass:
+                if item.name == self.__item_name_backstage_pass and item.quality < 50:
                     if item.sell_in < 11:
-                        if item.quality < 50:
-                            item.quality = self.__increase_quality(item.quality)
+                        item.quality = self.__increase_quality(item.quality)
                     if item.sell_in < 6:
-                        if item.quality < 50:
-                            item.quality = self.__increase_quality(item.quality)
+                        item.quality = self.__increase_quality(item.quality)
+        
         self.__update_item_sell_in(item)
+        
         if item.sell_in < 0:
             if item.name != self.__item_name_aged_brie:
                 if item.name != self.__item_name_backstage_pass:
