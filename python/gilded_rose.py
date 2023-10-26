@@ -26,10 +26,10 @@ class GildedRose:
             self.__update_item_quality(item)
 
     def __update_item_quality(self, item: Item) -> None:
-        if (
-            item.name != self.__item_name_aged_brie
-            and item.name != self.__item_name_backstage_pass
-        ):
+        if item.name not in [
+            self.__item_name_aged_brie,
+            self.__item_name_backstage_pass,
+        ]:
             if item.quality > 0:
                 if item.name != self.__item_name_sulfuras:
                     item.quality = self.__decrease_quality(item.quality)
