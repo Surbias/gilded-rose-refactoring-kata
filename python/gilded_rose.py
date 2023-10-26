@@ -9,7 +9,7 @@ class Item:
         self.sell_in = sell_in
         self.quality = quality
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
     def is_quality_below_average(self) -> bool:
@@ -18,13 +18,13 @@ class Item:
     def is_quality_positive(self) -> bool:
         return self.quality > 0
 
-    def increase_quality(self):
+    def increase_quality(self) -> None:
         self.quality += 1
 
-    def decrease_quality(self):
+    def decrease_quality(self) -> None:
         self.quality -= 1
 
-    def reset_quality(self):
+    def reset_quality(self) -> None:
         self.quality = 0
 
     def has_zero_or_above_sell_in(self) -> bool:
@@ -36,7 +36,7 @@ class Item:
     def is_sell_in_below_low(self) -> bool:
         return self.sell_in < 6
     
-    def decrease_sell_in(self):
+    def decrease_sell_in(self) -> None:
         self.sell_in -= 1
 
 
