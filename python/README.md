@@ -9,3 +9,4 @@
 - Extract variable (__known_item_names)
 - Move extracted functions from GildedRose to Item
 - Extract function (__is_known_item_name)
+- Extract function to Item class(decrease_sell_in)

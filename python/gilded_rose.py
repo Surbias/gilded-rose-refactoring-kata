@@ -26,6 +26,9 @@ class Item:
 
     def has_zero_or_above_sell_in(self) -> bool:
         return self.sell_in >= 0
+    
+    def decrease_sell_in(self):
+        self.sell_in -= 1
 
 
 class GildedRose:
@@ -61,7 +64,7 @@ class GildedRose:
                     item.increase_quality()
 
         if item.name != self.__item_name_sulfuras:
-            item.sell_in -= 1
+            item.decrease_sell_in()
 
         if item.has_zero_or_above_sell_in():
             return
