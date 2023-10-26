@@ -11,3 +11,5 @@
 - Extract function (__is_known_item_name)
 - Extract function to Item class(decrease_sell_in)
 - Extract function to Item class(is_quality_positive)
+- Extract variable (is_unknown_item_with_positive_quality, is_known_item_with_below_quality_average, is_backstage_pass_below_average)
+- Extract function to Item class(is_sell_in_below_low, is_sell_in_below_average)
