@@ -6,3 +6,4 @@
 - Extract function (__update_item_sell_in)
 - Simplify conditions (__update_item_quality)
 - Extract function (__is_item_quality_below_average)
+- Extract variable (__known_item_names)

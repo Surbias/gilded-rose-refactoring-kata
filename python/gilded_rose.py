@@ -17,6 +17,11 @@ class GildedRose:
     __item_name_aged_brie: Final[str] = "Aged Brie"
     __item_name_backstage_pass: Final[str] = "Backstage passes to a TAFKAL80ETC concert"
     __item_name_sulfuras: Final[str] = "Sulfuras, Hand of Ragnaros"
+    __known_item_names: Final[str] = [
+        __item_name_aged_brie,
+        __item_name_backstage_pass,
+        __item_name_sulfuras,
+    ]
 
     def __init__(self, items: list[Item]) -> None:
         self.items = items
@@ -26,15 +31,7 @@ class GildedRose:
             self.__update_item_quality(item)
 
     def __update_item_quality(self, item: Item) -> None:
-        if (
-            item.name
-            not in [
-                self.__item_name_aged_brie,
-                self.__item_name_backstage_pass,
-                self.__item_name_sulfuras,
-            ]
-            and item.quality > 0
-        ):
+        if item.name not in self.__known_item_names and item.quality > 0:
             item.quality = self.__decrease_quality(item.quality)
         else:
             if self.__is_item_quality_below_average(item.quality):
