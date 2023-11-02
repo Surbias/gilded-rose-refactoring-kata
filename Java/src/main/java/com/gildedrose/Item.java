@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class Item {
+public class Item implements IItem {
 
     public String name;
 
@@ -14,8 +14,15 @@ public class Item {
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
+    public void update() {
+        this.sellIn -= 1;
+        this.quality = this.quality > 0 ? this.quality - 1 : this.quality;
+        if (this.sellIn < 0)
+            this.quality = this.quality > 0 ? this.quality - 1 : this.quality;
+    }
+
+    @Override
+    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 }
