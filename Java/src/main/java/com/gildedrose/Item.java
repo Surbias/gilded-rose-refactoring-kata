@@ -15,10 +15,16 @@ public class Item implements IItem {
     }
 
     public void update() {
+        this.decreaseQuality();
+
         this.sellIn -= 1;
-        this.quality = this.quality > 0 ? this.quality - 1 : this.quality;
-        if (this.sellIn < 0)
-            this.quality = this.quality > 0 ? this.quality - 1 : this.quality;
+        if (this.sellIn > 0) return;
+
+        this.decreaseQuality();
+    }
+
+    private void decreaseQuality() {
+        if (this.quality > 0) this.quality -=1;
     }
 
     @Override

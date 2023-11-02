@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GildedRoseTest {
 
     @Test
-    void unknownItem() {
+    void Item() {
         Item[] items = new Item[]{
             new Item("foo", 0, 1),
             new Item("bar", 0, 2)
@@ -15,12 +15,14 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals("foo", app.items[0].name);
-        assertEquals(0, app.items[0].quality);
         assertEquals(-1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+        assertEquals("foo, -1, 0", app.items[0].toString());
 
         assertEquals("bar", app.items[1].name);
-        assertEquals(0, app.items[1].quality);
         assertEquals(-1, app.items[1].sellIn);
+        assertEquals(0, app.items[1].quality);
+        assertEquals("bar, -1, 0", items[1].toString());
     }
 
     @Test
@@ -54,11 +56,5 @@ class GildedRoseTest {
         assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name);
         assertEquals(0, app.items[0].quality);
         assertEquals(-1, app.items[0].sellIn);
-    }
-
-    @Test
-    void itemToString() {
-        Item item = new Item("baz", 0, 0);
-        assertEquals("baz, 0, 0", item.toString());
     }
 }
