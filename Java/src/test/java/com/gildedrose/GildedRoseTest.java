@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GildedRoseTest {
 
     @Test
-    void Item() {
+    void item() {
         Item[] items = new Item[]{
             new Item("foo", 0, 1),
             new Item("bar", 0, 2)
@@ -27,7 +27,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void sulfurasItem() {
+    void itemLegendary() {
         Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 1)};
 
         GildedRose app = new GildedRose(items);
@@ -38,7 +38,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void agedBrieItem() {
+    void itemAgedBrie() {
         Item[] items = new Item[]{new Item("Aged Brie", 0, 0)};
 
         GildedRose app = new GildedRose(items);
@@ -49,7 +49,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void backstagePassItem() {
+    void itemBackstagePass() {
         Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)};
 
         GildedRose app = new GildedRose(items);
