@@ -18,9 +18,10 @@ public class Item {
         this.decreaseQuality();
 
         this.sellIn -= 1;
-        if (this.sellIn > 0) return;
 
-        this.decreaseQuality();
+        if (this.sellIn < 0) {
+            this.decreaseQuality();
+        }
     }
 
     private void decreaseQuality() {

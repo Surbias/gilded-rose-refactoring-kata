@@ -11,7 +11,8 @@ public class ItemAgedBrie extends Item {
     public void update() {
         this.sellIn -= 1;
 
-        if (this.quality > 50) return;
-        this.quality += 2;
+        if (this.quality < 50) {
+            this.quality += 2;
+        }
     }
 }
