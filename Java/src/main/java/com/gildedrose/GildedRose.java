@@ -1,7 +1,7 @@
 package com.gildedrose;
 
 import com.gildedrose.item.Item;
-import com.gildedrose.item.ItemFactory;
+import com.gildedrose.item.IItemFactory;
 
 class GildedRose {
     Item[] items;
@@ -13,7 +13,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            ItemFactory
+            IItemFactory
                 .Item(item)
                 .update();
         }

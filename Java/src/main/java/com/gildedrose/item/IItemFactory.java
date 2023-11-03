@@ -1,6 +1,6 @@
 package com.gildedrose.item;
 
-public class ItemFactory {
+public class IItemFactory {
     private static final String agedBrieItem = "Aged Brie";
     private static final String sulfurasItem = "Sulfuras, Hand of Ragnaros";
     private static final String backstagePassItem = "Backstage passes to a TAFKAL80ETC concert";
