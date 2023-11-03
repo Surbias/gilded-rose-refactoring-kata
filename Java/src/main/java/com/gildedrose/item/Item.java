@@ -1,6 +1,6 @@
 package com.gildedrose.item;
 
-public class Item implements IItem {
+public class Item {
 
     public String name;
 
@@ -24,7 +24,7 @@ public class Item implements IItem {
     }
 
     private void decreaseQuality() {
-        if (this.quality > 0) this.quality -=1;
+        if (this.quality > 0) this.quality -= 1;
     }
 
     @Override
