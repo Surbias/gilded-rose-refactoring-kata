@@ -1,4 +1,4 @@
-package com.gildedrose;
+package com.gildedrose.item;
 
 public class ItemFactory {
     private static final String agedBrieItem = "Aged Brie";
@@ -8,11 +8,11 @@ public class ItemFactory {
     public static IItem Item(Item item) {
         switch (item.name) {
             case agedBrieItem:
-                return new AgedBrieItem(item);
+                return new ItemAgedBrie(item);
             case backstagePassItem:
-                return new BackstagePassItem(item);
+                return new ItemBackstagePass(item);
             case sulfurasItem:
-                return new LegendaryItem();
+                return new ItemLegendary();
             default:
                 return item;
         }

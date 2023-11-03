@@ -1,9 +1,9 @@
-package com.gildedrose;
+package com.gildedrose.item;
 
-public class AgedBrieItem implements IItem {
+public class ItemAgedBrie implements IItem {
     private final Item item;
 
-    public AgedBrieItem(Item item) {
+    public ItemAgedBrie(Item item) {
         this.item = item;
     }
 

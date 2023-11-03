@@ -1,9 +1,9 @@
-package com.gildedrose;
+package com.gildedrose.item;
 
-public class BackstagePassItem implements IItem {
+public class ItemBackstagePass implements IItem {
     private final Item item;
 
-    public BackstagePassItem(Item item) {
+    public ItemBackstagePass(Item item) {
         this.item = item;
     }
 
