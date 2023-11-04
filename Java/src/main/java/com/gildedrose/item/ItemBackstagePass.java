@@ -10,6 +10,10 @@ public class ItemBackstagePass extends Item {
     @Override
     public void update() {
         this.updateSellIn();
+        this.updateQuality();
+    }
+
+    private void updateQuality() {
         this.quality = 0;
     }
 }
