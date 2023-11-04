@@ -15,18 +15,22 @@ public class Item {
     }
 
     public void update() {
+        this.updateSellIn();
         this.decreaseQuality();
-
-        this.sellIn -= 1;
 
         if (this.sellIn < 0) {
             this.decreaseQuality();
         }
     }
 
+    protected void updateSellIn() {
+        this.sellIn -= 1;
+    }
+
     private void decreaseQuality() {
         if (this.quality > 0) this.quality -= 1;
     }
+
 
     @Override
     public String toString() {

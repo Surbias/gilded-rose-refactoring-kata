@@ -9,7 +9,7 @@ public class ItemBackstagePass extends Item {
 
     @Override
     public void update() {
-        this.sellIn -= 1;
+        this.updateSellIn();
         this.quality = 0;
     }
 }
