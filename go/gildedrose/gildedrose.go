@@ -13,50 +13,51 @@ type Item struct {
 
 func UpdateQuality(items []*Item) {
 	for _, item := range items {
-		if item.Name != agedBrie && item.Name != backstagePass {
-			if item.Quality > 0 {
-				if item.Name != sulfuras {
-					item.Quality -= 1
-				}
-			}
-		} else {
-			if item.Quality < 50 {
-				item.Quality = item.Quality + 1
-				if item.Name == backstagePass {
-					if item.SellIn < 11 {
-						if item.Quality < 50 {
-							item.Quality += 1
-						}
-					}
-					if item.SellIn < 6 {
-						if item.Quality < 50 {
-							item.Quality += 1
-						}
-					}
-				}
-			}
+		if item.Name == sulfuras {
+			continue
 		}
 
-		if item.Name != sulfuras {
+		if item.Name == backstagePass {
 			item.SellIn -= 1
-		}
-
-		if item.SellIn < 0 {
-			if item.Name != agedBrie {
-				if item.Name != backstagePass {
-					if item.Quality > 0 {
-						if item.Name != sulfuras {
-							item.Quality -= 1
-						}
-					}
-				} else {
-					item.Quality = 0
+			if item.Quality < 50 {
+				item.Quality += 1
+			}
+			if item.Quality < 50 {
+				if item.SellIn < 11 {
+					item.Quality += 1
 				}
-			} else {
-				if item.Quality < 50 {
+				if item.SellIn < 6 && item.Quality < 50 {
 					item.Quality += 1
 				}
 			}
+			if item.SellIn < 0 {
+				item.Quality = 0
+			}
+			continue
+		}
+
+		if item.Name == agedBrie {
+			item.SellIn -= 1
+			if item.Quality < 50 {
+				item.Quality += 1
+			}
+
+			if item.SellIn < 0 && item.Quality < 50 {
+				item.Quality += 1
+			}
+			continue
+		}
+
+		if item.Name != agedBrie && item.Name != backstagePass {
+			if item.Quality > 0 {
+				item.Quality -= 1
+			}
+			item.SellIn -= 1
+			if item.SellIn < 0 && item.Quality > 0 {
+				item.Quality -= 1
+
+			}
+			continue
 		}
 	}
 }
